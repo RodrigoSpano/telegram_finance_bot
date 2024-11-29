@@ -1,4 +1,7 @@
-need credentials.json > credentials from google cloud
+first create virtual-env
+python3 -m venv telegram-bot-env
+to activate venv => ``source telegram-bot-env/bin/activate``
+to desactivate env => ``deactivate``
 
 modules
-gspread oauth2client google-api-python-client pyTelegramBotAPI python-dotenv
+pip3 install pyTelegramBotAPI python-dotenv gspread oauth2client
