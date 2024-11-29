@@ -1,6 +1,7 @@
 import telebot
 from dotenv import load_dotenv
 import os
+from gsheets import clear_sheet,write_available_row
 
 load_dotenv(dotenv_path="./.env")
 
@@ -10,7 +11,7 @@ bot = telebot.TeleBot(API_TOKEN)
 # Command /start - /help handler
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-  bot.reply_to(message, "messages format {amount},{item},{category} \n - amount could be -3000 or 3000 \n - item could be book \n - categories are divided by letters (a,b,c,d), they are specified in the sheets")
+  bot.reply_to(message, "messages format {price},{item},{category} \n - amount could be -3000 or 3000 \n - item could be book \n - categories are divided by letters (a,b,c,d), they are specified in the sheets")
 
 # Command /info handler
 @bot.message_handler(commands=['info'])
@@ -21,8 +22,18 @@ def send_info(message):
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
   # bot.reply_to(message, message.text)
-  bot.reply_to(message, "que queres wachin")
+  splitted_data=message.text.split(",")
+  price=float(splitted_data[0].strip())
+  item=str(splitted_data[1].strip())
+  category=str(splitted_data[2].strip())
+  try:
+    write_available_row([price,item,category])
+    bot.reply_to(message, "Successfully saved!")
+  except:
+    bot.reply_to(message, "Oh oh, something went worng!!! try again later")
 
+
+  
 # Start the bot
 print("runninggg......................")
 bot.polling()
