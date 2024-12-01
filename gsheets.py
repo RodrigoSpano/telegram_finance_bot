@@ -42,5 +42,3 @@ def write_available_row(data):
 
 def clear_sheet():
     sheet.clear()
-
-print("runningg...")

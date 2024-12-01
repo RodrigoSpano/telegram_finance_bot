@@ -32,8 +32,13 @@ def echo_all(message):
   except:
     bot.reply_to(message, "Oh oh, something went worng!!! try again later")
 
+# Command /clear handler => clear paper
+@bot.message_handler(commands=['clear'])
+def send_info(message):
+  clear_sheet()
+  bot.reply_to(message, "CLear all my egress")
 
   
 # Start the bot
-print("runninggg......................")
+print("Bot running")
 bot.polling()
