@@ -1,0 +1,12 @@
+---
+
+services:
+  finance_bot:
+    image: rodrikbs/telegram_finance_bot:0.0.3
+    container_name: telegram_finance_bot
+    expose:
+      - 1001
+    env_file: .env
+    environment:
+      BOT_API_TOKEN: ${BOT_API_TOKEN}
+      SHEET_NAME: ${SHEET_NAME}
